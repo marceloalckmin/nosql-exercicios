@@ -9,19 +9,21 @@ sensores = db.sensores
 
 
 def random_temp(nome):
-    temp = random.randint(30,40)
-    print(f"{temp}ºC")
-    sensores.update_one(
-        {'valorSensor': {'$exists': True}},
-        {'valorSensor': temp}
-        )  
-    if temp > 38:
+    while True:
+        temp = random.randint(30,40) #gera os valores de temperatura aleatórios
+        print(f"{temp}ºC")
         sensores.update_one(
-            {'sensorAlarmado': {'$exists': True}},
-            {'$set':{'sensorAlarmado': True}}
+            {'nomeSensor': nome},
+            {'$Set'{'valorSensor': temp}}
+            )  
+        if temp > 38:
+            sensores.update_one(
+                {'nomeSensor': nome},
+                {'$set':{'sensorAlarmado': True}}
             )
-        print(f"Atenção! Temperatura muito alta! Verificar sensor {nome}!")
-    time.sleep(5)
+            print(f"Atenção! Temperatura muito alta! Verificar sensor {nome}!")
+            break
+        time.sleep(10)
       
 
 
