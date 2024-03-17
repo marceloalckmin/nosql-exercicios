@@ -1,0 +1,22 @@
+[
+    {
+        "nomeSensor": "Temp 1",
+        "valorSensor" : 0,
+        "unidadeMedida": "ºC",
+        "sensorAlarmado": false
+    },
+
+    {
+        "nomeSensor": "Temp 2",
+        "valorSensor" : 0,
+        "unidadeMedida": "ºC",
+        "sensorAlarmado": false
+    },
+
+    {
+        "nomeSensor": "Temp 3",
+        "valorSensor" : 0,
+        "unidadeMedida": "ºC",
+        "sensorAlarmado": false
+    }
+]
