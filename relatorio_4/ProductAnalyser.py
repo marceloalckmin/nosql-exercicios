@@ -9,7 +9,7 @@ class ProductAnalyzer:
             {
             "$group": {
             "_id": {"$dateToString": {"date": "$data_compra", "format": "%Y-%m-%d"}},
-            "totalVendas": {"$sum": "$valorTotal"}
+            "totalVendas": {"$sum": {"$multiply": ["$produtos.preco", "$produtos.quantidade"]}}
             }
             },
             {"$sort": {"_id": 1}}
@@ -37,7 +37,7 @@ class ProductAnalyzer:
         {
             "$group": {
             "_id": "$cliente.nome",
-            "maiorCompra": {"$max": "$valorTotal"}
+            "maiorCompra": {"$sum": {"$multiply": ["$produtos.preco", "$produtos.quantidade"]}}
             }
         },
         {"$sort": {"maiorCompra": -1}},
@@ -46,7 +46,7 @@ class ProductAnalyzer:
         return result
         
 
-    def products_sold_more_than_once(self):
+    def vendeu_mais_de_um(self):
         #Lista todos os produtos que tiveram uma quantidade vendida acima de 1 unidades.
         return self.db.aggregate([
             {"$unwind": "$produtos"},
