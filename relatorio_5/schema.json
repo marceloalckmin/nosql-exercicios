@@ -1,0 +1,38 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "titulo",
+        "autor",
+        "ano",
+        "preco"
+      ],
+      "properties": {
+            "titulo":{
+                "bsonType": "string",
+                "description":"deve ser uma string"
+            },
+            "autor":{
+                "bsonType": "string",
+                "description": "deve ser uma string"
+            },
+            "ano":{
+                "bsonType": "int",
+                "description": "deve ser um inteiro"
+            },
+            "preco":{
+                "bsonType": "double",
+                "description": "deve ser um double"
+            }
+        }
+    }
+}
+
+
+{
+    "_id": 1,
+    "titulo": "Clean Code",
+    "autor": "Robert C. Martin",
+    "ano": 2008,
+    "preco": 31.0
+}
