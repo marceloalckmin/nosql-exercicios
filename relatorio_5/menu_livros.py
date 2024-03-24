@@ -28,7 +28,7 @@ def menu_livros(database):
             print("Entre o ano do livro: ")
             ano = int(input())
             print("Entre o preço do livro: ")
-            preco = input()
+            preco = float(input())
             livros.create_livro(titulo=titulo, autor=autor, ano=ano, preco=preco)
 
         elif opcao == "2":
@@ -47,7 +47,7 @@ def menu_livros(database):
             print("Entre o ano do livro: ")
             ano = int(input())
             print("Entre o preço do livro: ")
-            preco = input()
+            preco = float(input())
             livros.update_livro(id,titulo,autor,ano,preco)
         
         elif opcao == "4":
