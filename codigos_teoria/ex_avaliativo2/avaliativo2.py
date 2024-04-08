@@ -1,3 +1,50 @@
+"""
+Parte1 - Queries do Neo4j:
+
+#Criando os nodes:
+CREATE(:Pessoa:Engenheiro{nome:'Marcelo',sexo:'Masculino',idade:'20'})
+CREATE(:Pessoa:Advogado{nome:'Rodrigo',sexo:'Masculino',idade:'47'})
+CREATE(:Pessoa:Estudante{nome:'Fernanda',sexo:'Feminino',idade:'11'})
+CREATE(:Pet:Cachorro{nome:'Bebel',sexo:'Feminino',idade:'2'})
+CREATE(:Pessoa:Estudante{nome:'Caroline',sexo:'Feminino',idade:'20'})
+CREATE(:Pet:Gato{nome:'Gragas',sexo:'Masculino',idade:'1'})
+CREATE(:Pet:Cachorro{nome:'Melissa',sexo:'Feminino',idade:'5'})
+CREATE(:Pessoa:Administrativo{nome:'Suellen',sexo:'Feminino',idade:'40'})
+CREATE(:Pessoa:Aposentado{nome:'Marilene',sexo:'Feminino',idade:'63'})
+CREATE(:Pessoa:Administrativo{nome:'Wilson',sexo:'Masculino',idade:'62'})
+
+#Criando os relacionamentos:
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Rodrigo'})
+CREATE(p2)-[:PAI_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Suellen'})
+CREATE(p2)-[:PAI_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Fernanda'}),(p2:Pessoa{nome:'Suellen'})
+CREATE(p2)-[:PAI_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Suellen'}),(p2:Pessoa{nome:'Marilene'})
+CREATE(p2)-[:PAI_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Marilene'})
+CREATE(p2)-[:AVO_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Wilson'})
+CREATE(p2)-[:AVO_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Fernanda'}),(p2:Pessoa{nome:'Marilene'})
+CREATE(p2)-[:AVO_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Fernanda'}),(p2:Pessoa{nome:'Wilson'})
+CREATE(p2)-[:AVO_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Caroline'})
+CREATE(p2)-[:NAMORADO_DE{desde:'setembro de 2023'}]->(p1)
+CREATE(p1)-[:NAMORADO_DE{desde:'setembro de 2023'}]->(p2)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(pet:Pet)
+CREATE (p1)-[:DONO_DE]->(pet)
+MATCH(p1:Pessoa{nome:'Marilene'}),(p2:Pessoa{nome:'Wilson'})
+CREATE (p1)-[:ESPOSO_DE]->(p2)
+CREATE (p2)-[:ESPOSO_DE]->(p1)
+MATCH(p1:Pessoa{nome:'Marcelo'}),(p2:Pessoa{nome:'Fernanda'})
+CREATE (p1)-[:IRMAO_DE]->(p2)
+CREATE (p2)-[:IRMAO_DE]->(p1)
+"""
+
+
+
 from neo4j import GraphDatabase, basic_auth
 from neo4j.exceptions import ServiceUnavailable
 

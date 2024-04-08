@@ -1,4 +1,0 @@
-Boa noite Professor! Tudo certo?
-Sobre a parte 1, coloquei todos os prints das criações aqui, incluindo um print sobre a visão geral no neo4j de como ficaram os nós/relacionamentos
-Unica alteração que eu fiz sobre os prints foi ter adicionado o relacionamento PAI_DE para outro nó (Da Fernanda, 11)
-De resto tudo segue como está nos prints!
