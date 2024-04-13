@@ -1,0 +1,53 @@
+{
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": ["nota_motorista", "corridas"],
+      "properties": {
+        "nota_motorista": {
+          "bsonType": "int",
+          "minimum": 0,
+          "maximum": 5,
+          "description": "A nota deve ser um inteiro entre 0 e 5"
+        },
+        "corridas": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "object",
+            "required": ["nota_corrida", "distancia", "valor", "passageiro"],
+            "properties": {
+              "nota_corrida": {
+                "bsonType": "int",
+                "minimum": 0,
+                "maximum": 5,
+                "description": "A nota precisa ser um inteiro entre 0 e 5"
+              },
+              "distancia": {
+                "bsonType": "double",
+                "minimum": 0,
+                "description": "Um número de ponto flutuante (não tem float, então vai double) de no mínimo 0"
+              },
+              "valor": {
+                "bsonType": "double",
+                "minimum": 0,
+                "description": "Um valor para o preço da corrida que pode ser racional de no mínimo 0 reais"
+              },
+              "passageiro": {
+                "bsonType": "object",
+                "required": ["nome", "documento"],
+                "properties": {
+                  "nome": {
+                    "bsonType": "string",
+                    "description": "uma string que é o nome do passageiro"
+                  },
+                  "documento": {
+                    "bsonType": "string",
+                    "description": "Uma string que é o documento do passageiro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
