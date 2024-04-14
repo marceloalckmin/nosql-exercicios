@@ -19,11 +19,36 @@ class MotoristaDAO:
         except Exception as e:
             print(f"Ocorreu um erro ao criar o motorista: {e}")
             return None
-
+        
+    def read_motorista(self, id_motorista):
+        try:
+            motorista_dict = self.db.collection.find_one({"_id": ObjectId(id_motorista)})
+            if motorista_dict:
+                motorista_dict["_id"] = str(id_motorista)
+                motorista_dict["nota_motorista"] = int(motorista_dict["nota_motorista"])
+                corridas = motorista_dict.get("corridas", [])
+                lista_corridas = []
+                for corrida in corridas:
+                    corrida["nota_corrida"] = int(corrida["nota_corrida"])
+                    corrida["distancia"] = float(corrida["distancia"])
+                    corrida["valor"] = float(corrida["valor"])
+                    corrida["passageiro"] = Passageiro(corrida["passageiro"]["nome"],corrida["passageiro"]["documento"])
+                    lista_corridas.append(Corrida(corrida["nota_corrida"], corrida["distancia"], corrida["valor"], corrida["passageiro"]))
+                motorista_dict["corridas"] = [corrida for corrida in corridas]
+                motorista= Motorista(lista_corridas, motorista_dict["nota_motorista"])
+            return motorista
+        except Exception as e:
+            print(f"Ocorreu um erro ao procurar o motorista: {e}")
+            return None
+        
     def update_motorista(self, id_motorista, motorista):
         try:
             corridas = []
-            corridas = motorista.corridas
+            for corrida in motorista.corridas:
+                corrida_doc = corrida.__dict__
+                passageiro_dict = corrida_doc["passageiro"].__dict__
+                corrida_doc["passageiro"] = passageiro_dict
+                corridas.append(corrida_doc)
             motorista_doc = {
                 "nota_motorista": motorista.nota_motorista,
                 "corridas": corridas
@@ -35,23 +60,6 @@ class MotoristaDAO:
             print(f"Ocorreu um erro ao atualizar o motorista: {e}")
             return None
 
-    def read_motorista(self, id_motorista):
-        try:
-            motorista = self.db.collection.find_one({"_id": ObjectId(id_motorista)})
-            if motorista:
-                motorista["_id"] = str(id_motorista)
-                motorista["nota_motorista"] = int(motorista["nota_motorista"])
-                corridas = motorista.get("corridas", [])
-                for corrida in corridas:
-                    corrida["nota_corrida"] = int(corrida["nota_corrida"])
-                    corrida["distancia"] = float(corrida["distancia"])
-                    corrida["valor"] = float(corrida["valor"])
-                    corrida["passageiro"] = Passageiro(corrida["passageiro"]["nome"],corrida["passageiro"]["documento"])
-                motorista["corridas"] = corridas
-            return motorista
-        except Exception as e:
-            print(f"Ocorreu um erro ao procurar o motorista: {e}")
-            return None
 
     def delete_motorista(self, id_motorista):
         try:
