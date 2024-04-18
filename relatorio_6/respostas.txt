@@ -1,0 +1,72 @@
+### **Questão 01**
+1. Todos os registros do banco de dados.
+Resposta:
+MATCH (n) RETURN n
+
+2. Jogos lançados após o ano de 2012.
+Resposta:
+MATCH(g:Game)
+WHERE g.ano > 2012
+RETURN g
+
+3. Jogos do gênero de terror.
+Resposta:
+MATCH(g:Game)
+WHERE g.genero = "Terror"
+RETURN g
+
+4. Jogos com uma nota igual ou maior que 7.
+Resposta: 
+MATCH(:Jurado)-[j:JOGOU]->(g:Game)
+WHERE j.nota >= 7
+RETURN g
+
+### **Questão 02**
+1. Acrescente quatro novos jogos ao banco de dados.
+Resposta:
+CREATE(g:Game{titulo:'Dota 2',genero:'MOBA',ano:2013});
+CREATE(g:Game{titulo:'Terraria',genero:'Sandbox',ano:2011});
+CREATE(g:Game{titulo:'Outlast',genero:'Terror',ano:2013});
+CREATE(g:Game{titulo:'Counter Strike: Global Offensive',genero:'Shooter',ano:2012});
+
+2. Adicione três novos jurados ao banco de dados.
+Resposta: 
+CREATE(j:Jurado{nome:'Marcelo'});
+CREATE(j:Jurado{nome:'Pinha'});
+CREATE(j:Jurado{nome:'Hubbao'});
+
+
+3. Estabeleça as relações entre os jurados e os jogos que eles avaliaram, incluindo a nota e a quantidade de horas jogadas.
+Resposta:
+MATCH(j:Jurado{nome:'Marcelo'}),(g:Game{titulo:'Terraria'})
+CREATE(j)-[:JOGOU{nota:8, horas:250}]->(g);
+
+MATCH(j:Jurado{nome:'Marcelo'}),(g:Game{titulo:'League of Legends'})
+CREATE(j)-[:JOGOU{nota:0, horas: 3000}]->(g);
+
+MATCH(j:Jurado{nome:'Marcelo'}),(g:Game{titulo:'Counter Strike: Global Offensive'})
+CREATE(j)-[:JOGOU{nota:10, horas: 1500}]->(g);
+
+MATCH(j:Jurado{nome:'Marcelo'}),(g:Game{titulo:'Minecraft'})
+CREATE(j)-[:JOGOU{nota:10, horas: 4000}]->(g);
+
+MATCH(j:Jurado{nome:'Marcelo'}),(g:Game{titulo:'Dota 2'})
+CREATE(j)-[:JOGOU{nota:10, horas: 1000}]->(g);
+
+MATCH(j:Jurado{nome:'Pinha'}),(g:Game{titulo:'Dota 2'})
+CREATE(j)-[:JOGOU{nota:10, horas: 2500}]->(g);
+
+MATCH(j:Jurado{nome:'Pinha'}),(g:Game{titulo:'Outlast'})
+CREATE(j)-[:JOGOU{nota:6, horas: 30}]->(g);
+
+MATCH(j:Jurado{nome:'Pinha'}),(g:Game{titulo:'Terraria'})
+CREATE(j)-[:JOGOU{nota:5, horas: 100}]->(g);
+
+MATCH(j:Jurado{nome:'Hubbao'}),(g:Game{titulo:'Dota 2'})
+CREATE(j)-[:JOGOU{nota:4, horas: 500}]->(g);
+
+MATCH(j:Jurado{nome:'Hubbao'}),(g:Game{titulo:'League of Legends'})
+CREATE(j)-[:JOGOU{nota:84, horas: 5000}]->(g);
+
+MATCH(j:Jurado{nome:'Hubbao'}),(g:Game{titulo:'Counter Strike: Global Offensive'})
+CREATE(j)-[:JOGOU{nota:7, horas: 800}]->(g);
