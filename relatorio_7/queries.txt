@@ -1,0 +1,20 @@
+Agregações:
+1 - match(n:Airport) return count(n)
+2 - match(n:Airport) return avg(n.altitude)
+3 - match(n:Airport) return sum(n.pagerank)
+4 - match(n:Airport) return min(n.altitude)
+5 - match(n:Airport) return max(n.altitude)
+
+Matemáticas:
+1 - match(n:Airport) return ceil(n.altitude)
+2 - match(n:Airport) return floor(n.altitude)
+3 - match(n:Airport)  where n.altitude = -72 return abs(n.altitude)
+4 - match(n:Airport) where n.altitude = -72 return sign(n.altitude)
+5 - match(n:Airport) where n.city = 'Campinas' set n.pagerank = round(n.pagerank)
+
+String:
+1 - match (n:City) where left(n.name, 3) = 'San' return n
+2 - match (n:City) where right(n.name, 1) = 'o' return n
+3 - match(n:Airport) where n.descr = 'Afonso Pena Airport' return toupper(n.descr)
+4 - match(n:Airport) where n.city = 'Rio de Janeiro' return reverse(n.descr)
+5 - match(n:Airport) where n.city = 'Miami' return replace(n.descr, 'i', 'uwu')
