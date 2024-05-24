@@ -1,0 +1,50 @@
+CREATE TABLE estoque(
+	id BIGINT,
+	nome TEXT,
+	carro TEXT,
+	estante INT,
+	nivel INT,
+	quantidade INT,
+	PRIMARY KEY((id,nome),carro)
+);
+
+
+
+INSERT INTO estoque(id,nome,carro,estante,nivel,quantidade)
+VALUES (5, 'Pistao', 'Mustang', 4, 1, 167);
+
+INSERT INTO estoque(id,nome,carro,estante,nivel,quantidade)
+VALUES (4, 'Suspencao', 'Argo', 1, 1, 3500);
+
+
+Questão 2
+1)
+SELECT * 
+FROM estoque
+WHERE nome = 'Pistao';
+
+2)
+SELECT AVG(quantidade)
+FROM estoque;
+
+3)
+SELECT COUNT(*) FROM estoque;
+
+4)
+SELECT MIN AS "menor quantidade"(quantidade), MAX AS "maior quantidade"(quantidade) FROM estoque;
+
+5)
+SELECT (nome, carro, quantidade)
+FROM estoque
+WHERE estante = 3;
+
+6)
+SELECT AVG(quantidade)
+FROM estoque
+WHERE nivel = 1;
+
+7)
+SELECT *
+FROM estoque
+WHERE estante < 3 AND nivel > 4;
+
