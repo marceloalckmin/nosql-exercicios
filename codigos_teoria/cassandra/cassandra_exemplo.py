@@ -20,10 +20,6 @@ row = session.execute("select release_version from system.local").one()
 if row:
     print(row[0])
 else:
-<<<<<<< HEAD
-    print("An error ocurred.")
-=======
     print("An error ocurred.")
 
 session.set_keyspace('ksiot')
->>>>>>> 21ca08bbafac589c8cd9a591d1f9f56233107b15
